@@ -4,6 +4,7 @@ import * as ReactDOM from 'react-dom';
 import DVDataGrid from '../DVComponents/DVDataGrid';
 import DVMenuList from "../DVComponents/DVMenuList";
 import TreeMenu from "../DVComponents/TreeMenu";
+import DVForms from "../DVComponents/DVForms";
 import DVBarGuage from "../DVComponents/DVBarGuage";
 import DVBarChart from "../DVComponents/DVBarChart";
 import JqxButton from 'jqwidgets-scripts/jqwidgets-react-tsx/jqxbuttons';
@@ -36,7 +37,7 @@ class ListScreen extends React.PureComponent<{}, ILayoutProps> {
                             contentContainer: 'Document1Panel',
                             title: 'User Management',
                             type: 'documentPanel',
-                            initContent: (): void => {ReactDOM.render(<DVDataGrid/>, document.getElementById('Document1PanelExplorer'));}
+                            initContent: (): void => {ReactDOM.render(<DVForms/>, document.getElementById('Document1PanelExplorer'));}
                         }],
                         minHeight: '55%',
                         type: 'documentGroup'
@@ -76,8 +77,8 @@ class ListScreen extends React.PureComponent<{}, ILayoutProps> {
                         type: 'layoutPanel'
                     }],
                     type: 'tabbedGroup',
-                    minWidth: '18%',
-                    width: '18%',
+                    minWidth: '19%',
+                    width: '19%',
                     allowClose:false,
                     allowPin:false,
                     selected: false,
@@ -132,7 +133,7 @@ class ListScreen extends React.PureComponent<{}, ILayoutProps> {
                 <div data-container="SystemStats">
                     <div id="SystemStatsExplorer3" style={{ border: 'none', width: '99%', height: '33%' }} />
                     <div id="SystemStatsExplorer" style={{ border: 'none', width: '99%', height: '33%' }} />
-                    <div id="SystemStatsExplorer2" style={{ border: 'none', width: '99%', height: '34%' }} />
+                    <div id="SystemStatsExplorer2" style={{ border: 'none', width: '99%', height: '33%' }} />
                 </div>
             </JqxLayout>
             </div>

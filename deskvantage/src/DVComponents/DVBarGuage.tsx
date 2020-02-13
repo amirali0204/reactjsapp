@@ -5,10 +5,11 @@ class DVJqxBarGauge extends React.PureComponent<{}, IBarGaugeProps> {
         super(props);
         this.state = {
             tooltip: {                
-                formatFunction: (value: number): string => {
-                    return ('Year: 2016<br/>Price Index:' + value);
-                },
-                visible: true  
+                    formatFunction: (value: string): string => {
+                        return ('Year: 2016<br/>Price Index:' + value);
+                    },
+                    visible: true  
+                
             },
             values: [60]
         };

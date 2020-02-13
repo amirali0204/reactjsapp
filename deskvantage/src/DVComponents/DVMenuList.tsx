@@ -1,7 +1,6 @@
 import * as React from 'react';
 import JqxMenu, { IMenuProps, jqx } from 'jqwidgets-scripts/jqwidgets-react-tsx/jqxmenu';
 class DVMenuList extends React.PureComponent<{}, IMenuProps> {
-    private eventLog = React.createRef<HTMLDivElement>();
     constructor(props: {}) {
         super(props);
         this.onItemClick = this.onItemClick.bind(this);
