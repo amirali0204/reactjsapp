@@ -157,7 +157,7 @@ class DVMenuList extends React.PureComponent<{}, IMenuProps> {
         return (
             <div>
                 <JqxMenu onItemclick={this.onItemClick}
-                    width={'90%'} height={30} source={this.state.source} theme={'material'}/>
+                    width={'60%'} height={30} source={this.state.source} theme={'bootstrap'}/>
             </div>
         );
     }

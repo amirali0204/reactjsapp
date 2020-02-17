@@ -1,6 +1,7 @@
 import * as React from 'react';
 import JqxTree, { ITreeProps, jqx } from 'jqwidgets-scripts/jqwidgets-react-tsx/jqxtree';
 class TreeMenu extends React.PureComponent<{}, ITreeProps> {
+    private myTree = React.createRef<JqxTree>();
     constructor(props: {}) {
         super(props);
         const data = [
@@ -32,7 +33,7 @@ class TreeMenu extends React.PureComponent<{}, ITreeProps> {
             }, {
                 'id': '6',
                 'parentid': '-1',
-                'text': 'Layouts',
+                'text': 'Layout Styles',
                 'value': '$2.3'
             }, {
                 'id': '7',
@@ -48,35 +49,6 @@ class TreeMenu extends React.PureComponent<{}, ITreeProps> {
                 'id': '9',
                 'parentid': '6',
                 'text': 'Timeline View',
-                'value': '$2.3'
-            },{
-                'id': '12',
-                'parentid': '-1',
-                'text': 'Bulk Actions'
-            }, {
-                'id': '13',
-                'parentid': '12',
-                'text': 'Block',
-                'value': '$2.3'
-            }, {
-                'id': '15',
-                'parentid': '12',
-                'text': 'UnBlock',
-                'value': '$2.3'
-            }, {
-                'id': '16',
-                'parentid': '12',
-                'text': 'Approve',
-                'value': '$2.3'
-            }, {
-                'id': '17',
-                'parentid': '12',
-                'text': 'Update Role',
-                'value': '$2.3'
-            }, {
-                'id': '14',
-                'parentid': '12',
-                'text': 'Tag',
                 'value': '$2.3'
             }
         ];
@@ -98,10 +70,13 @@ class TreeMenu extends React.PureComponent<{}, ITreeProps> {
             source: records
         }
     }
+    public componentDidMount(): void {
+        this.myTree.current!.expandAll();
+      }
     public render() {
         return (
-            <JqxTree theme={'material'} style={{border:"none !important"}} 
-                source={this.state.source}
+            <JqxTree ref={this.myTree} theme={'bootstrap'} style={{border:"none !important"}} 
+                source={this.state.source} checkboxes={false}
             />
         );
     }

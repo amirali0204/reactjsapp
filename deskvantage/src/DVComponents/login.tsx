@@ -30,7 +30,7 @@ class dvlogin extends React.Component<{}, IButtonProps> {
     }
     public render() {
         if(SessionHandler.isAuthenticated() === "1"){
-            return <Redirect to="/app"></Redirect>
+            return <Redirect to="/Staff"></Redirect>
         }
         return (
             <JqxPanel width={350} height={350} style={{margin: '0px', top: '26%', left: "38%", position: 'absolute'}} >

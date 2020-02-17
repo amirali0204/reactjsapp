@@ -7,7 +7,6 @@ import TreeMenu from "../DVComponents/TreeMenu";
 import DVForms from "../DVComponents/DVForms";
 import DVBarGuage from "../DVComponents/DVBarGuage";
 import DVBarChart from "../DVComponents/DVBarChart";
-import JqxButton from 'jqwidgets-scripts/jqwidgets-react-tsx/jqxbuttons';
 class ListScreen extends React.PureComponent<{}, ILayoutProps> {
     constructor(props: {}) {
         super(props);
@@ -16,8 +15,8 @@ class ListScreen extends React.PureComponent<{}, ILayoutProps> {
                 items: [{
                     alignment: 'left',
                     items: [{
-                        contentContainer: 'SolutionExplorerPanel',
-                        initContent: (): void => {ReactDOM.render(<TreeMenu/>, document.getElementById('solutionExplorerTree'));},
+                        contentContainer: 'LeftMenuPanel',
+                        initContent: (): void => {ReactDOM.render(<TreeMenu/>, document.getElementById('LeftMenuTree'));},
                         title: '',
                         type: 'layoutPanel'
                     }],
@@ -37,7 +36,9 @@ class ListScreen extends React.PureComponent<{}, ILayoutProps> {
                             contentContainer: 'Document1Panel',
                             title: 'User Management',
                             type: 'documentPanel',
-                            initContent: (): void => {ReactDOM.render(<DVForms/>, document.getElementById('Document1PanelExplorer'));}
+                            initContent: (): void => {
+                                ReactDOM.render(<DVDataGrid/>, document.getElementById('Document1PanelExplorer'));
+                            }
                         }],
                         minHeight: '55%',
                         type: 'documentGroup'
@@ -93,7 +94,7 @@ class ListScreen extends React.PureComponent<{}, ILayoutProps> {
         return (
             <div>
                 <div>
-                    <h4 style={{float:'left'}}>DeskVantage Logo</h4>
+                    <img style={{float:'left', height:'60px', width:'200px'}} src="./../Assets/system_logo.png" alt="Logo" />
                     <div style={{marginLeft: '300px',paddingTop:"13px", width: '75%'}}><DVMenuList />
                 </div>
             </div>
@@ -103,21 +104,8 @@ class ListScreen extends React.PureComponent<{}, ILayoutProps> {
             <JqxLayout style={{border: 'none'}} theme="material" width={'100%'} height={window.innerHeight-105} layout={this.state.layout}>
                 <div data-container="Document1Panel">
                     <div>
-                        <div style={{float:'left', marginTop:'0px', marginLeft:'340px'}}>
-                            <div style={{float:'left'}}>
-                                <JqxButton width={120} imgPosition={'left'} textPosition={'left'}
-                                        textImageRelation={'imageBeforeText'} imgSrc={'./../images/facebook.png'}>Create</JqxButton>
-                                        </div>
-                            <div style={{float:'right', marginLeft:'10px'}}><JqxButton width={120} imgPosition={'left'} textPosition={'left'}
-                                        textImageRelation={'imageBeforeText'} imgSrc={'./../images/facebook.png'}>Delete</JqxButton>
-                            </div>
-                            <div style={{float:'right', marginLeft:'10px'}}><JqxButton width={120} imgPosition={'left'} textPosition={'left'}
-                                        textImageRelation={'imageBeforeText'} imgSrc={'./../images/facebook.png'}>Block User</JqxButton>
-                            </div>
-                        </div>
-                        
                         <div id="Document1PanelExplorer" 
-                        style={{ border: 'none', width: '99%', height: '90%',marginTop:'20px',float:'left' }} />
+                        style={{ border: 'none', width: '97%', height: '90%',marginTop:'20px',float:'left' }} />
                        
                     </div>
 
@@ -126,8 +114,8 @@ class ListScreen extends React.PureComponent<{}, ILayoutProps> {
                 <div data-container="RecentActivityListPanel">List of Recent Activities</div>
                 <div data-container="RecentFilesPanel">List of Recent updated Files</div>
                 <div data-container="OutputPanel">Output</div>
-                <div data-container="SolutionExplorerPanel">
-                    <div id="solutionExplorerTree" style={{ border: 'none', width: '99%', height: '100%' }} />
+                <div data-container="LeftMenuPanel">
+                    <div id="LeftMenuTree" style={{ border: 'none', width: '99%', height: '100%' }} />
                 </div>
                 <div data-container="ExtraActions">Extra Quick Actions</div>
                 <div data-container="SystemStats">

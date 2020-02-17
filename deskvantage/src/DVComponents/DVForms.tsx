@@ -1,8 +1,5 @@
 import React from 'react';
 import JQXform,  { IFormProps } from "jqwidgets-scripts/jqwidgets-react-tsx/jqxform"
-import DVMenuList from "../DVComponents/DVMenuList"
-import ReactDOM from 'react-dom';
-import jqx from 'jqwidgets-scripts/jqwidgets/jqx-all'
 class DVForms extends React.PureComponent<{}, IFormProps> {
     constructor(props: {}) {
         super(props);
@@ -10,7 +7,7 @@ class DVForms extends React.PureComponent<{}, IFormProps> {
         const columns: IFormProps['template'] = [
             {
                 align: 'left',
-                bind: 'checkboxValue1',
+                bind: 'checkboxValue2',
                 columnWidth: '140px',                                
                 label: 'Checkbox 1',                                
                 labelPadding: { left: 0, top: 5, right: 0, bottom: 5 },
@@ -42,7 +39,7 @@ class DVForms extends React.PureComponent<{}, IFormProps> {
                 {
                     columns: [{
                         align: 'left',
-                        bind: 'checkboxValue1',
+                        bind: 'checkboxValue2',
                         columnWidth: '140px',                                
                         label: 'Checkbox 1',                                
                         labelPadding: { left: 0, top: 5, right: 0, bottom: 5 },
@@ -148,7 +145,7 @@ class DVForms extends React.PureComponent<{}, IFormProps> {
             ],
             value: {
                 checkboxValue1: false,
-                checkboxValue2: false,
+                checkboxValue2: "hgugi",
                 checkboxValue3: true,
                 dropdownValue: 'value3',
                 nubmberBoxValue: 67.44,
@@ -166,8 +163,7 @@ class DVForms extends React.PureComponent<{}, IFormProps> {
             <div>
                 <JQXform style={{ width: '100%', height: 'auto' }}
                 template={this.state.template} value={this.state.value}></JQXform>
-                <div data-container="SystemStats">
-                <div id="solutionExplorerTree"></div></div>
+    
             </div>
         );
     }
