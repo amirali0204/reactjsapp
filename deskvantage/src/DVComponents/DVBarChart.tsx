@@ -12,7 +12,7 @@ class DVBarChart extends React.PureComponent<{}, IChartProps> {
             { Country: 'Brazil', Population: 192376496, Percent: 2.74 }
         ];
         this.state = {
-            description: 'Statistics for 2018',
+            description: 'Active',
             padding: { left: 20, top: 5, right: 20, bottom: 5 },
             seriesGroups: [
                 {
@@ -25,7 +25,7 @@ class DVBarChart extends React.PureComponent<{}, IChartProps> {
                 }
             ],
             source: sampleData,
-            title: 'Active Users',
+            title: 'Users',
             titlePadding: { left: 90, top: 0, right: 0, bottom: 10 },
             valueAxis: {
                 flip: true,
@@ -45,7 +45,7 @@ class DVBarChart extends React.PureComponent<{}, IChartProps> {
     }
     public render() {
         return (
-            <JqxChart ref={this.myChart} style={{ width: '100%', height: '100%' }}
+            <JqxChart ref={this.myChart} style={{ width: '100%', height: '90%' }}
                 title={this.state.title} description={this.state.description}
                 enableAnimations={true} showLegend={true} padding={this.state.padding}
                 titlePadding={this.state.titlePadding} source={this.state.source} xAxis={this.state.xAxis}

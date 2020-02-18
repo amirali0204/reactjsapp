@@ -1,7 +1,17 @@
 import * as React from 'react';
+import { withRouter } from "react-router-dom";
 import JqxMenu, { IMenuProps, jqx } from 'jqwidgets-scripts/jqwidgets-react-tsx/jqxmenu';
-class DVMenuList extends React.PureComponent<{}, IMenuProps> {
-    constructor(props: {}) {
+import { History, LocationState } from "history";
+import { connect } from 'react-redux'
+import { Dispatch } from "redux";
+
+interface MyComponentProps {
+    history: History<LocationState>;
+}
+
+class DVMenuList extends React.Component<MyComponentProps&NotesListState&any, IMenuProps> {
+
+    constructor(props) {
         super(props);
         this.onItemClick = this.onItemClick.bind(this);
         const data = [
@@ -150,19 +160,45 @@ class DVMenuList extends React.PureComponent<{}, IMenuProps> {
         };
         const dataAdapter = new jqx.dataAdapter(source, { autoBind: true });
         this.state = {
-            source: dataAdapter.getRecordsHierarchy('id', 'parentid', 'items', [{ name: 'text', map: 'label' }])
+            source: dataAdapter.getRecordsHierarchy('id', 'parentid', 'items', [{ name: 'text', map: 'label' }]),
         }
     }
     public render() {
         return (
             <div>
-                <JqxMenu onItemclick={this.onItemClick}
+                <JqxMenu onItemclick={this.onItemClick} 
                     width={'60%'} height={30} source={this.state.source} theme={'bootstrap'}/>
             </div>
         );
     }
     private onItemClick(event: any): void {
-       // this.eventLog.current!.innerHTML = 'Id: ' + event.args.id + ', Text: ' + event.args.innerText;
+        event.preventDefault()
+        this.props.menuaction(event.args.innerText);
+       // this.setState({menuselected: event.args.innerText});
+     
+     //   alert("dddd"+this.props.state.rootReducer.menuselected);
+        this.props.history.push('/'+event.args.innerText)  ;
+        
     };
 }
-export default DVMenuList;
+export interface IStoreState {
+    type: string
+  };
+interface NotesListState {
+    menuaction: (id) => (dispatch: Dispatch<IStoreState>) => Promise<void>;
+  }
+let mapStateToProps =  (state) => ({
+    state: state,
+});
+export const toggleTodo = id => ({
+    type: 'TOGGLE_TODO',
+    id
+  })
+
+  const mapDispatchToProps = dispatch => ({
+    menuaction: id => dispatch(toggleTodo(id))
+  })
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(withRouter(DVMenuList));

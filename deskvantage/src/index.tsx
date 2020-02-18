@@ -1,9 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter} from 'react-router-dom'
+import { Router } from 'react-router-dom'
+import { Provider } from 'react-redux'
 import App from './DVApps/App';
 import * as serviceWorker from './serviceWorker';
-ReactDOM.render(<BrowserRouter><App /></BrowserRouter>, document.getElementById('app'));
+import createBrowserHistory from 'history/createBrowserHistory';
+import  {persistor,store} from "./DVReducers/Storeconfig"
+import { PersistGate } from 'redux-persist/lib/integration/react';
+// import the two exports from the last code snippet.
+let history = createBrowserHistory();
+
+ReactDOM.render(
+<Provider store={store}>
+    <PersistGate persistor={persistor}>
+        <Router history={history}>
+            <App />
+        </Router>
+    </PersistGate>
+</Provider>, document.getElementById('app'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

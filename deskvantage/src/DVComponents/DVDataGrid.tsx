@@ -57,7 +57,8 @@ class DVDataGrid extends React.PureComponent<{}, IGridProps> {
             <JqxGrid theme={'bootstrap'} sortable={true} altrows={true}  showtoolbar={true}
             rendertoolbar={this.state.rendertoolbar} pageable={true}
             onSort={this.myGridOnSort} filterable={true} selectionmode={'checkbox'}
-                width={'100%'} height={window.innerHeight-245} source={this.state.source} columns={this.state.columns} columnsresize={true} />
+                width={'100%'} height={window.innerHeight-245} 
+                source={this.state.source} columns={this.state.columns} columnsresize={true} />
         );
     }
     private createButtons(): void {

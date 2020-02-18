@@ -3,20 +3,23 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import DVDataGrid from '../DVComponents/DVDataGrid';
 import DVMenuList from "../DVComponents/DVMenuList";
-import TreeMenu from "../DVComponents/TreeMenu";
-import DVForms from "../DVComponents/DVForms";
+import {LeftTreeBuilder} from "../DVControllers/LeftTreeBuilder"
+import { connect } from 'react-redux'
 import DVBarGuage from "../DVComponents/DVBarGuage";
 import DVBarChart from "../DVComponents/DVBarChart";
-class ListScreen extends React.PureComponent<{}, ILayoutProps> {
-    constructor(props: {}) {
+class ListScreen extends React.Component<NotesListState&any, ILayoutProps> {
+    constructor(props) {
+        
         super(props);
+        console.log(this.props);
         this.state = {
             layout: [{
                 items: [{
                     alignment: 'left',
                     items: [{
                         contentContainer: 'LeftMenuPanel',
-                        initContent: (): void => {ReactDOM.render(<TreeMenu/>, document.getElementById('LeftMenuTree'));},
+                        initContent: (): void => {
+                            ReactDOM.render(<LeftTreeBuilder Id={this.props.state.rootReducer.menuselected}/>, document.getElementById('LeftMenuTree'));},
                         title: '',
                         type: 'layoutPanel'
                     }],
@@ -65,8 +68,8 @@ class ListScreen extends React.PureComponent<{}, ILayoutProps> {
                     }],
                     orientation: 'vertical',
                     type: 'layoutGroup',
-                    width: '66%',
-                    minWidth: '66%'
+                    width: '70%',
+                    minWidth: '70%'
                 },{
                     alignment: 'right',
                     items: [ {
@@ -78,8 +81,8 @@ class ListScreen extends React.PureComponent<{}, ILayoutProps> {
                         type: 'layoutPanel'
                     }],
                     type: 'tabbedGroup',
-                    minWidth: '19%',
-                    width: '19%',
+                    minWidth: '15%',
+                    width: '15%',
                     allowClose:false,
                     allowPin:false,
                     selected: false,
@@ -87,8 +90,13 @@ class ListScreen extends React.PureComponent<{}, ILayoutProps> {
                 }],
                 orientation: 'horizontal',
                 type: 'layoutGroup'
-            }]
+            }],
         }
+    }
+    componentDidUpdate(){
+      //  alert('list mounted');
+        console.log(this.props);
+    //    alert(this.props.state.rootReducer.menuselected);
     }
     public render() {
         return (
@@ -101,21 +109,20 @@ class ListScreen extends React.PureComponent<{}, ILayoutProps> {
             <br/>
             <hr></hr>
             <br/>
-            <JqxLayout style={{border: 'none'}} theme="material" width={'100%'} height={window.innerHeight-105} layout={this.state.layout}>
+            <JqxLayout style={{border: 'none'}} theme="material" width={'100%'} height={window.innerHeight-115} layout={this.state.layout}>
                 <div data-container="Document1Panel">
                     <div>
                         <div id="Document1PanelExplorer" 
-                        style={{ border: 'none', width: '97%', height: '90%',marginTop:'20px',float:'left' }} />
+                        style={{ border: 'none', width: '99%', height: '90%',marginTop:'20px',float:'left' }} />
                        
                     </div>
-
                 </div>
                 <div data-container="MessagesListPanel">List of Messages</div>
                 <div data-container="RecentActivityListPanel">List of Recent Activities</div>
                 <div data-container="RecentFilesPanel">List of Recent updated Files</div>
                 <div data-container="OutputPanel">Output</div>
                 <div data-container="LeftMenuPanel">
-                    <div id="LeftMenuTree" style={{ border: 'none', width: '99%', height: '100%' }} />
+                    <div id="LeftMenuTree" style={{ border: 'none', width: '99%', height: '96%' }} />
                 </div>
                 <div data-container="ExtraActions">Extra Quick Actions</div>
                 <div data-container="SystemStats">
@@ -128,4 +135,25 @@ class ListScreen extends React.PureComponent<{}, ILayoutProps> {
         );
     }
 }
-export default ListScreen;
+
+export interface IStoreState {
+    type: string
+  };
+interface NotesListState {
+    menuaction: (id) => (dispatch: React.Dispatch<IStoreState>) => Promise<void>;
+  }
+const mapStateToProps =  (state) => ({
+    state: state,
+});
+export const toggleTodo = id => ({
+    type: 'TOGGLE_TODO',
+    id
+  })
+
+  const mapDispatchToProps = dispatch => ({
+    menuaction: id => dispatch(toggleTodo(id))
+  })
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )( ListScreen);

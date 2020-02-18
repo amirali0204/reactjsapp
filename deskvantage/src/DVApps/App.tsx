@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 import ListScreen  from '../Layouts/ListScreen';
-import Login from '../DVComponents/login';
+import Login from '../Layouts/LoginScreen';
 import {ProtectedRoute} from '../DVControllers/ProtectedRouter';
 
 class App extends React.PureComponent<{}> {
@@ -13,8 +13,8 @@ class App extends React.PureComponent<{}> {
         return (
             <div>
                 <Switch>
-                    <ProtectedRoute exact path="/Staff" component ={ListScreen}></ProtectedRoute>
-                    <Route exact path="*" component ={Login}></Route>
+                    <Route exact path="/login" component ={Login}></Route>
+                    <ProtectedRoute exact path="*" component ={ListScreen}></ProtectedRoute>
                 </Switch>
             </div>
         );
