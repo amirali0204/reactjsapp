@@ -1,5 +1,5 @@
 import  React from "react"
-import {LeftMenuLayouts} from "./Layouts/LeftMenuLayouts"
+import {LeftMenuLayouts} from "../DVComponents/ComponentData/LeftTreeMenuList/"
 import TreeMenu from "../DVComponents/TreeMenu";
 import {jqx } from 'jqwidgets-scripts/jqwidgets-react-tsx/jqxtree';
 

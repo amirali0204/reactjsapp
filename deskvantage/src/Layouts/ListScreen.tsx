@@ -7,96 +7,107 @@ import {LeftTreeBuilder} from "../DVControllers/LeftTreeBuilder"
 import { connect } from 'react-redux'
 import DVBarGuage from "../DVComponents/DVBarGuage";
 import DVBarChart from "../DVComponents/DVBarChart";
-class ListScreen extends React.Component<NotesListState&any, ILayoutProps> {
-    constructor(props) {
-        
-        super(props);
-        console.log(this.props);
-        this.state = {
-            layout: [{
-                items: [{
-                    alignment: 'left',
-                    items: [{
-                        contentContainer: 'LeftMenuPanel',
-                        initContent: (): void => {
-                            ReactDOM.render(<LeftTreeBuilder Id={this.props.state.rootReducer.menuselected}/>, document.getElementById('LeftMenuTree'));},
-                        title: '',
-                        type: 'layoutPanel'
-                    }],
-                    type: 'tabbedGroup',
-                    orientation:'vertical',
-                    unpinnedWidth: '15%',
-                    width: '15%',
-                    minWidth:'15%',
-                    allowClose:false,
-                    allowPin:false,
-                    selected: false,
-                    allowUnpin:false
-                },{
-                    items: [{
-                        height: '95%',
-                        items: [{
-                            contentContainer: 'Document1Panel',
-                            title: 'User Management',
-                            type: 'documentPanel',
-                            initContent: (): void => {
-                                ReactDOM.render(<DVDataGrid/>, document.getElementById('Document1PanelExplorer'));
-                            }
-                        }],
-                        minHeight: '55%',
-                        type: 'documentGroup'
-                    }, {
-                        height: '5%',
-                        pinnedHeight:'50%',
-                        unpinnedHeight:'50%',
-                        alignment:'bottom',
-                        items: [{
-                            contentContainer: 'MessagesListPanel',
-                            title: 'Live Messages',
-                            type: 'layoutPanel'
-                        },{
-                            contentContainer: 'RecentActivityListPanel',
-                            title: 'Recent Activities',
-                            type: 'layoutPanel'
-                        },{
-                            contentContainer: 'RecentFilesPanel',
-                            title: 'Recent Updated Files',
-                            type: 'layoutPanel'
-                        }],
-                        
-                        type: 'autoHideGroup',
-                    }],
-                    orientation: 'vertical',
-                    type: 'layoutGroup',
-                    width: '70%',
-                    minWidth: '70%'
-                },{
-                    alignment: 'right',
-                    items: [ {
-                        contentContainer: 'SystemStats',
-                        initContent: (): void => {ReactDOM.render(<DVBarGuage/>, document.getElementById('SystemStatsExplorer'));
-                        ReactDOM.render(<DVBarGuage/>, document.getElementById('SystemStatsExplorer2'));
-                        ReactDOM.render(<DVBarChart/>, document.getElementById('SystemStatsExplorer3'));},
-                        title: '',
-                        type: 'layoutPanel'
-                    }],
-                    type: 'tabbedGroup',
-                    minWidth: '15%',
-                    width: '15%',
-                    allowClose:false,
-                    allowPin:false,
-                    selected: false,
-                    allowUnpin:false
-                }],
-                orientation: 'horizontal',
-                type: 'layoutGroup'
+class ListScreen extends React.Component<NotesListState&any, ILayoutProps&any> {
+    private myLayout = React.createRef<JqxLayout>();
+    listlayout = [{
+        items: [
+            {
+            alignment: 'left',
+            items: [{
+                contentContainer: 'LeftMenuPanel',
+                initContent: (): void => {
+                    ReactDOM.render(<LeftTreeBuilder Id={this.props.menuselected}/>, document.getElementById('LeftMenuTree'));
+                },
+                title: '',
+                type: 'layoutPanel'
             }],
+            type: 'tabbedGroup',
+            orientation:'vertical',
+            unpinnedWidth: '15%',
+            width: '15%',
+            minWidth:'15%',
+            allowClose:false,
+            allowPin:false,
+            selected: false,
+            allowUnpin:false
+        },{
+            items: [{
+                height: '95%',
+                items: [{
+                    contentContainer: 'Document1Panel',
+                    title: this.props.menuselected+' Management',
+                    type: 'documentPanel',
+                    initContent: (): void => {
+                        ReactDOM.render(<DVDataGrid menuselected={this.props.menuselected}/>, document.getElementById('Document1PanelExplorer'));
+                    }
+                }],
+                minHeight: '55%',
+                type: 'documentGroup'
+            }, {
+                height: '5%',
+                pinnedHeight:'50%',
+                unpinnedHeight:'50%',
+                alignment:'bottom',
+                items: [{
+                    contentContainer: 'MessagesListPanel',
+                    title: 'Live Messages',
+                    type: 'layoutPanel'
+                },{
+                    contentContainer: 'RecentActivityListPanel',
+                    title: 'Recent Activities',
+                    type: 'layoutPanel'
+                },{
+                    contentContainer: 'RecentFilesPanel',
+                    title: 'Recent Updated Files',
+                    type: 'layoutPanel'
+                }],
+                
+                type: 'autoHideGroup',
+            }],
+            orientation: 'vertical',
+            type: 'layoutGroup',
+            width: '70%',
+            minWidth: '70%'
+        },{
+            alignment: 'right',
+            items: [ {
+                contentContainer: 'SystemStats',
+                initContent: (): void => {ReactDOM.render(<DVBarGuage/>, document.getElementById('SystemStatsExplorer'));
+                ReactDOM.render(<DVBarGuage/>, document.getElementById('SystemStatsExplorer2'));
+                ReactDOM.render(<DVBarChart/>, document.getElementById('SystemStatsExplorer3'));},
+                title: '',
+                type: 'layoutPanel'
+            }],
+            type: 'tabbedGroup',
+            minWidth: '15%',
+            width: '15%',
+            allowClose:false,
+            allowPin:false,
+            selected: false,
+            allowUnpin:false
+        }],
+        orientation: 'horizontal',
+        type: 'layoutGroup'
+    }];
+
+    constructor(props) {    
+        super(props);
+        
+        this.state = {
+            layout: this.listlayout,
         }
+       
     }
-    componentDidUpdate(){
-      //  alert('list mounted');
-        console.log(this.props);
-    //    alert(this.props.state.rootReducer.menuselected);
+    public componentDidMount(): void {
+   this.myLayout.current!.refresh();
+   this.myLayout.current!.render();
+      }
+    componentDidUpdate(prevProps, prevState) {
+        if((prevProps.menuselected != this.props.menuselected)) { 
+            this.myLayout.current!.refresh();
+            this.myLayout.current!.render();
+            this.setState({layout: this.listlayout})
+        }
     }
     public render() {
         return (
@@ -109,7 +120,8 @@ class ListScreen extends React.Component<NotesListState&any, ILayoutProps> {
             <br/>
             <hr></hr>
             <br/>
-            <JqxLayout style={{border: 'none'}} theme="material" width={'100%'} height={window.innerHeight-115} layout={this.state.layout}>
+            <JqxLayout style={{border: 'none'}} theme="material" width={'100%'} ref={this.myLayout}
+            height={window.innerHeight-115} layout={this.state.layout}>
                 <div data-container="Document1Panel">
                     <div>
                         <div id="Document1PanelExplorer" 
@@ -142,9 +154,19 @@ export interface IStoreState {
 interface NotesListState {
     menuaction: (id) => (dispatch: React.Dispatch<IStoreState>) => Promise<void>;
   }
-const mapStateToProps =  (state) => ({
-    state: state,
-});
+const mapStateToProps = state => {
+    if(state.rootReducer !== null){
+        return {
+            state: state,
+            menuselected: state.rootReducer.menuselected,
+        }
+    }else{
+        return {
+            state: state,
+            menuselected: "Orders",
+        }
+    }
+  }
 export const toggleTodo = id => ({
     type: 'TOGGLE_TODO',
     id

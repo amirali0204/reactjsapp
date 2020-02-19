@@ -3,8 +3,10 @@ import * as ReactDOM from 'react-dom';
 import JqxGrid, { IGridProps, jqx } from 'jqwidgets-scripts/jqwidgets-react-tsx/jqxgrid';
 import {griddata} from "./beverages";
 import JqxButton from 'jqwidgets-scripts/jqwidgets-react-tsx/jqxbuttons';
-class DVDataGrid extends React.PureComponent<{}, IGridProps> {
-    constructor(props: {}) {
+import {dvGridColumns,dvGridDataFields} from "../DVComponents/ComponentData/GridList/index"
+class DVDataGrid extends React.Component<{}&any, IGridProps> {
+    constructor(props) {
+        super(props);
         const rendertoolbar = (statusbar: any): void => {
             const style: React.CSSProperties = { float: 'right', marginLeft: '5px' };
             const buttonsContainer = (
@@ -16,17 +18,10 @@ class DVDataGrid extends React.PureComponent<{}, IGridProps> {
                 </div>
             );
             ReactDOM.render(buttonsContainer, statusbar[0]);
-        };
-        super(props);
+        }
         const source: any =
         {
-            datafields: [
-                { name: 'name', type: 'string' },
-                { name: 'type', type: 'string' },
-                { name: 'calories', type: 'int' },
-                { name: 'totalfat', type: 'string' },
-                { name: 'protein', type: 'string' }
-            ],
+            datafields: dvGridDataFields[this.props.menuselected],
             datatype: 'json',
             id: 'id',
             pagesize: 15,
@@ -35,13 +30,7 @@ class DVDataGrid extends React.PureComponent<{}, IGridProps> {
             sortdirection: 'asc'
         };
         this.state = {
-            columns: [
-                { text: 'Name', datafield: 'name', width: '20%' },
-                { text: 'Beverage Type', datafield: 'type', width: '20%' },
-                { text: 'Calories', datafield: 'calories', width: '20%' },
-                { text: 'Total Fat', datafield: 'totalfat', width: '20%' },
-                { text: 'Protein', datafield: 'protein', minwidth: '20%' }
-            ],
+            columns: dvGridColumns[this.props.menuselected],
             source: new jqx.dataAdapter(source),
             rendertoolbar,
         }
@@ -49,10 +38,13 @@ class DVDataGrid extends React.PureComponent<{}, IGridProps> {
     public componentDidMount() {
         setTimeout(() => {
             this.createButtons();
-        });      
+        });    
+        
+       
     }
  
     public render() {
+        console.log(this.state)
         return (
             <JqxGrid theme={'bootstrap'} sortable={true} altrows={true}  showtoolbar={true}
             rendertoolbar={this.state.rendertoolbar} pageable={true}
@@ -101,6 +93,5 @@ class DVDataGrid extends React.PureComponent<{}, IGridProps> {
     }
     private myGridOnSort(event: any): void {
     }
-
 }
-export default DVDataGrid;
+export default (DVDataGrid)

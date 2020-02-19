@@ -174,11 +174,8 @@ class DVMenuList extends React.Component<MyComponentProps&NotesListState&any, IM
     private onItemClick(event: any): void {
         event.preventDefault()
         this.props.menuaction(event.args.innerText);
-       // this.setState({menuselected: event.args.innerText});
-     
-     //   alert("dddd"+this.props.state.rootReducer.menuselected);
-        this.props.history.push('/'+event.args.innerText)  ;
-        
+        this.props.history.push('/'+event.args.innerText);
+        window.location.reload(false);
     };
 }
 export interface IStoreState {

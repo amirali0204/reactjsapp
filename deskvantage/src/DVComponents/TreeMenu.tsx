@@ -5,22 +5,6 @@ class TreeMenu extends React.Component<ITreeProps> {
     private myTree = React.createRef<JqxTree>();
     constructor(props) {
         super(props);
-
-        // const source: any  = {
-        //     datafields: [
-        //         { name: 'id' },
-        //         { name: 'parentid' },
-        //         { name: 'text' },
-        //         { name: 'value' }
-        //     ],
-        //     datatype: 'json',
-        //     id: 'id',
-        //     localdata: data,
-        // };
-        // const dataAdapter = new jqx.dataAdapter(source, { autoBind: true });
-        // this.state = {
-        //     source: dataAdapter.getRecordsHierarchy('id', 'parentid', 'items', [{ name: 'text', map: 'label' }])
-        // }
     }
     public componentDidMount(): void {
         this.myTree.current!.expandAll();
