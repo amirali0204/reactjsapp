@@ -1,23 +1,33 @@
 import { combineReducers } from 'redux'
-import { throws } from 'assert';
 
-export const rootReducer   = (state, action) => {
+const initialState = {
+  menuselected: "Orders",
+  viewselected: "Grid"
+}
+
+export function rootReducer(state = initialState, action) {
   switch (action.type) {
     case "TOGGLE_TODO":
-      if(action.id !== undefined)
-
-        return state = {menuselected: action.id}
-       else{
-        state = {menuselected: "Staff"};
-       return state;
-       }
+      if(action.id !== undefined){
+        if(state === null){
+          state = initialState
+        }
+        return {...state, 
+          menuselected: action.id
+        }
+      }
+    break;
+    case "TOGGLE_VIEW":
+      if(action.id !== undefined){
+        if(state === null){
+          state = initialState
+        }
+        return {...state, 
+          viewselected: action.id
+        }
+      }
     break;
   default:
-     //  alert("redggg")
-      // if(state !== undefined)
-      // alert(state.menuselected)
-      // alert(action.id);
-      
      return null;
   }
 }

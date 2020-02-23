@@ -19,7 +19,7 @@ class DVMenuList extends React.Component<MyComponentProps&NotesListState&any, IM
                 'id': '12',
                 'parentid': '-1',
                 'subMenuWidth': '250px',
-                'text': 'Customer Management'
+                'text': 'Customers'
             },
             
             
@@ -27,13 +27,13 @@ class DVMenuList extends React.Component<MyComponentProps&NotesListState&any, IM
                 'id': '1',
                 'parentid': '-1',
                 'subMenuWidth': '250px',
-                'text': 'Project Management'
+                'text': 'Projects'
             },
             {
                 'id': '20',
                 'parentid': '-1',
                 'subMenuWidth': '250px',
-                'text': 'Billing Management'
+                'text': 'Billing'
             },{
                 'id': '21',
                 'parentid': '20',
@@ -73,7 +73,7 @@ class DVMenuList extends React.Component<MyComponentProps&NotesListState&any, IM
             {
                 'id': '7',
                 'parentid': '6',
-                'text': 'Customer Service'
+                'text': 'CustomerSupport'
             },
             {
                 'id': '8',
@@ -88,7 +88,7 @@ class DVMenuList extends React.Component<MyComponentProps&NotesListState&any, IM
             {
                 'id': '10',
                 'parentid': '6',
-                'text': 'Support programs'
+                'text': 'SupportPrograms'
             },
             {
                 'id': '11',
@@ -103,7 +103,7 @@ class DVMenuList extends React.Component<MyComponentProps&NotesListState&any, IM
             {
                 'id': '15',
                 'parentid': '2',
-                'text': 'Manage Services'
+                'text': 'Services'
             },
             {
                 'id': '19',
@@ -113,7 +113,7 @@ class DVMenuList extends React.Component<MyComponentProps&NotesListState&any, IM
             {
                 'id': '24',
                 'parentid': '1',
-                'text': 'Work Queue'
+                'text': 'WorkQueue'
             },
             {
                 'id': '25',
@@ -124,12 +124,12 @@ class DVMenuList extends React.Component<MyComponentProps&NotesListState&any, IM
             {
                 'id': '16',
                 'parentid': '2',
-                'text': 'Service Templates'
+                'text': 'ServiceTemplates'
             },
             {
                 'id': '17',
                 'parentid': '18',
-                'text': 'File Manager'
+                'text': 'FileManager'
             },
             {
                 'id': '14',
@@ -139,7 +139,7 @@ class DVMenuList extends React.Component<MyComponentProps&NotesListState&any, IM
             {
                 'id': '18',
                 'parentid': '12',
-                'text': 'File Management'
+                'text': 'Files'
             },
             {
                 'id': '19',
@@ -162,15 +162,17 @@ class DVMenuList extends React.Component<MyComponentProps&NotesListState&any, IM
         this.state = {
             source: dataAdapter.getRecordsHierarchy('id', 'parentid', 'items', [{ name: 'text', map: 'label' }]),
         }
+
     }
     public render() {
         return (
             <div>
                 <JqxMenu onItemclick={this.onItemClick} 
-                    width={'60%'} height={30} source={this.state.source} theme={'bootstrap'}/>
+                    width={'50%'} height={30} source={this.state.source} theme={'bootstrap'}/>
             </div>
         );
     }
+
     private onItemClick(event: any): void {
         event.preventDefault()
         this.props.menuaction(event.args.innerText);

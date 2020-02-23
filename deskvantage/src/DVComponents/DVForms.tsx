@@ -8,7 +8,6 @@ class DVForms extends React.Component<IFormProps> {
     private onclick(e?: Event){
         const args = "args";
         const name = "name";
-      //  alert(e[args][name]);
         // post the form data to the server and wait for response
         //Response could be - Notification / Redirect to URL / Download file etc
     }

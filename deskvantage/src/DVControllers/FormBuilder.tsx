@@ -1,5 +1,5 @@
 import  React, { Component } from "react"
-import {ScreenLayouts} from "./Layouts/FormLayouts"
+import {FormLayouts,FormLayoutValues} from "../DVComponents/ComponentData/FormLayouts/"
 import DVForms from "../DVComponents/DVForms";
 
 type formId = {
@@ -16,7 +16,7 @@ export class FormBuilder extends React.Component<formId> {
             <div >
                 <DVForms 
                  backgroundColor={ '#fff !important' } borderColor ={'#fff'} 
-                 template={ScreenLayouts[this.props.Id]} value={ScreenLayouts["LoginScreenValue"]}></DVForms>
+                 template={FormLayouts[this.props.Id]} value={FormLayoutValues[this.props.Id]}></DVForms>
             </div>
         );
     }

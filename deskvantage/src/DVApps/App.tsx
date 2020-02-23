@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import {Route, Switch} from 'react-router-dom';
-import ListScreen  from '../Layouts/ListScreen';
-import Login from '../Layouts/LoginScreen';
+import ListScreen  from '../DVLayouts/ListScreen';
+import Login from '../DVLayouts/LoginScreen';
 import {ProtectedRoute} from '../DVControllers/ProtectedRouter';
 
 class App extends React.PureComponent<{}> {

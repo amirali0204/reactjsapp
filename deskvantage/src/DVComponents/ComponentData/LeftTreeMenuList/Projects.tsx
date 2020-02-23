@@ -32,17 +32,17 @@ export const ProjectsTreeMenuLayouts= [{
     'id': '7',
     'parentid': '6',
     'text': 'Grid View',
-    'value': '$2.3'
+    'value': 'Grid'
 }, {
     'id': '8',
     'parentid': '6',
     'text': 'kanban View',
-    'value': '$2.3'
+    'value': 'Kanban'
 }, {
     'id': '9',
     'parentid': '6',
     'text': 'Timeline View',
-    'value': '$2.3'
+    'value': 'Timeline'
 }
 ];
 

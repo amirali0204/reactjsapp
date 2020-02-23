@@ -8,7 +8,7 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import  {persistor,store} from "./DVReducers/Storeconfig"
 import { PersistGate } from 'redux-persist/lib/integration/react';
 // import the two exports from the last code snippet.
-let history = createBrowserHistory();
+const history = createBrowserHistory();
 
 ReactDOM.render(
 <Provider store={store}>
@@ -22,4 +22,4 @@ ReactDOM.render(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+serviceWorker.register();
