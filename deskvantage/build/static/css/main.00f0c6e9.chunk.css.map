@@ -1,1 +1,0 @@
-{"version":3,"sources":["mystyle.module.css"],"names":[],"mappings":"AAAA,4BACI,qBACF,CACF,0BACI,wBAA4B,CAC5B,sBACF","file":"main.00f0c6e9.chunk.css","sourcesContent":[".searchalign {\n    float: right !important;\n  }\n.menualign {\n    padding-left: 0px !important; \n    margin-top: 0px !important;\n  }"]}

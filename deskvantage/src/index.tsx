@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import App from './DVApps/App';
+import App from './Apps/App';
 import * as serviceWorker from './serviceWorker';
 import createBrowserHistory from 'history/createBrowserHistory';
-import  {persistor,store} from "./DVReducers/Storeconfig"
+import  {persistor,store} from "./Reducers/Storeconfig"
 import { PersistGate } from 'redux-persist/lib/integration/react';
 // import the two exports from the last code snippet.
 const history = createBrowserHistory();
